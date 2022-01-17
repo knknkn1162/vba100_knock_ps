@@ -4,6 +4,11 @@
 
 + Powershell version of [knknkn1162/vba100_knock](https://github.com/knknkn1162/vba100_knock). See also https://excel-ubara.com/vba100/.
 
+# requirements
+
++ Windows >= 10
++ Powershell >= 5.1
+
 # Prerequisites
 
 ```ps
