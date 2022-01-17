@@ -11,8 +11,22 @@
 
 # Prerequisites
 
++ Install chocolatey, nkf, make
++ (Optional) ghostscript, imagemagick.app
+
 ```ps
+# scripts to be runnable
 Set-ExecutionPolicy RemoteSigned
+# install commands in Admin
+Start-Process powershell -Verb runAs
+choco source add -n kai2nenobu -s https://www.myget.org/F/kai2nenobu
+choco install -y nkf make
+
+# (Optional) when capture
+Start-Process powershell -Verb runAs
+choco install -y imagemagick.app ghostscript
+## specify version
+$ENV:Path="C:\Program Files\ImageMagick-${version};"+$ENV:Path
 ```
 
 # How to run
