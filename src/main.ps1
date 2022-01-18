@@ -1,23 +1,25 @@
 Param(
     [string]$pspath,
     [string]$xlpath,
-    [bool]$visible = $false
+    [switch]$debug
 )
 
 ."$pspath"
 
 try {
     $app = New-Object -ComObject Excel.Application
-    $app.visible = $visible
-    if ($visible -eq $false) {
+    $saveChanges=$true
+    if ($debug -eq $true) {
+        $app.visible = $true
         $app.DisplayAlerts = $false
+        $saveChanges=$false
     }
     try {
         $book = $app.Workbooks.Open($xlpath)
         Run-Macro($book)
         $input = Read-Host "press any key.."
     } finally {
-        [void]$book.Close($false)
+        [void]$book.Close($saveChanges)
         [System.Runtime.Interopservices.Marshal]::ReleaseComObject($book)
     }
 } finally {
