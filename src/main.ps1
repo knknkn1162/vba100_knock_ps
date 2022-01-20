@@ -8,6 +8,14 @@ Param(
 
 try {
     $app = New-Object -ComObject Excel.Application
+    # get constants such as $xlDirection::xlUp
+    # Note) [System.type].GetType() requires AssemblyQualifiedName, but it's messy:(
+    $app.GetType().Assembly.GetExportedTypes() | `
+        ? {$_.isEnum} | `
+        %{ Set-Variable `
+            -Name $_.Name `
+            -Value ("Microsoft.Office.Interop.Excel.{0}" -f ($_.Name) -as [type]) `
+        }
     $saveChanges=$true
     if ($debug -eq $true) {
         $app.visible = $true
