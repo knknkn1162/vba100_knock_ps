@@ -5,5 +5,6 @@ function Run-Macro($app, $book) {
     $rng.Columns(1).Cells | `
         ? {[String]$_.Value() -ne ""} | `
         ? {[String]$_.Offset(0,1).Value() -ne ""} | `
-        % {$_.Offset(0,2).FormulaR1C1 =  "=RC[-2] * RC[-1]"}
+        % {$_.Offset(0,2) = $_.Offset(0,1).Value() * $_.Value();}
+
 }
