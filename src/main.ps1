@@ -9,7 +9,7 @@ Param(
 try {
 
     # [Microsoft.Office.Interop.Excel.ApplicationClass]
-    $app = New-Object -ComObject Excel.Application
+    [Microsoft.Office.Interop.Excel.ApplicationClass]$app = New-Object -ComObject Excel.Application
     # get constants such as $xlDirection::xlUp
     # Note) [System.type].GetType() requires AssemblyQualifiedName, but it's messy:(
     $app.GetType().Assembly.GetExportedTypes() | `
