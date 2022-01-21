@@ -7,6 +7,8 @@ Param(
 ."$pspath"
 
 try {
+
+    # [Microsoft.Office.Interop.Excel.ApplicationClass]
     $app = New-Object -ComObject Excel.Application
     # get constants such as $xlDirection::xlUp
     # Note) [System.type].GetType() requires AssemblyQualifiedName, but it's messy:(
@@ -24,7 +26,7 @@ try {
     }
     try {
         $book = $app.Workbooks.Open($xlpath)
-        Run-Macro($book)
+        Run-Macro $app $book
         $input = Read-Host "press any key.."
     } finally {
         [void]$book.Close($saveChanges)
