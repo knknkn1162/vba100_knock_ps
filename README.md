@@ -11,7 +11,7 @@
 
 # Prerequisites
 
-+ Install chocolatey, nkf, make
++ Install chocolatey, make
 + (Optional) ghostscript, imagemagick.app
 
 ```ps
@@ -19,8 +19,7 @@
 Set-ExecutionPolicy RemoteSigned
 # install commands in Admin
 Start-Process powershell -Verb runAs
-choco source add -n kai2nenobu -s https://www.myget.org/F/kai2nenobu
-choco install -y nkf make
+choco install -y make
 
 # (Optional) when capture
 Start-Process powershell -Verb runAs
@@ -29,9 +28,13 @@ choco install -y imagemagick.app ghostscript
 $ENV:Path="C:\Program Files\ImageMagick-${version};"+$ENV:Path
 ```
 
-# How to run
+# How to run scripts
 
 ```ps
-# specify basename of xlsm file.
+# 1. (optional) create shell script from template
+make template XLSM=ex001
+# 2. Edit your code
+# 3. run the script as macro
 make run XLSM=ex001
+# make run XLSM=ex001 DEBUG=0 # save after macro, run faster
 ```
