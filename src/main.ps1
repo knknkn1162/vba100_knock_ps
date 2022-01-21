@@ -4,7 +4,16 @@ Param(
     [switch]$debug
 )
 
+Function Write-Info([String]$msg) {
+    If($debug) {
+        Write-Verbose $msg -verbose
+    } else {
+        Write-Verbose $msg
+    }
+}
+
 ."$pspath"
+
 
 try {
 
@@ -18,6 +27,7 @@ try {
             -Name $_.Name `
             -Value ("Microsoft.Office.Interop.Excel.{0}" -f ($_.Name) -as [type]) `
         }
+    $xlnull = [System.Reflection.Missing]::Value
     $saveChanges=$true
     if ($debug -eq $true) {
         $app.visible = $true

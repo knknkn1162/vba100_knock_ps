@@ -3,7 +3,7 @@ function Create-WorkSheet($book, [String]$name) {
     try {
         [void]$book.Worksheets($name).Delete()
     } catch {
-        Write-Warning "[WARNING] Worksheet: ${name} does not exist"
+        Write-Info "Worksheets(${name}) does not exist"
     }
     $cnt = $book.Worksheets.Count()
     $ws = $book.Worksheets.Add($xlnull, $book.Worksheets($cnt))
