@@ -40,6 +40,7 @@ run: create-$(SRC_ENC_DIR)
 template:
 	cp ./template/template.ps1 $(SCRIPT_PATH)
 
+.PHONY: push commit clean
 push: commit
 	git push
 commit:
