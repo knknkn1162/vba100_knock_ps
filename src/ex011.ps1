@@ -1,8 +1,12 @@
 function Run-Macro($app, $book) {
+    $ws = $book.Worksheets(1)
     try {
-        $rng = $book.Worksheets(1).Cells.SpecialCells($XlCellType::xlCellTypeConstants)
+        $rng = $ws.Cells.SpecialCells($XlCellType::xlCellTypeConstants)
     } catch {}
-    $rng.Cells | `
+    [String[]]$arr = $rng.Cells | `
         ? {$_.MergeCells()} | `
-        % {[void]$_.AddComment("セル結合されています")}
+        % {$_.MergeArea(1).Address()} | sort | unique
+    echo ($arr -join ",")
+    $ws.Range($arr -join ",") | `
+        %{$_.AddComment("セル結合されています")}
 }
