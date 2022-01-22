@@ -14,7 +14,7 @@ Function Write-Info([String]$msg) {
 
 ."$pspath"
 
-
+$xlEnum = New-Object -TypeName PSObject
 try {
 
     # [Microsoft.Office.Interop.Excel.ApplicationClass]
@@ -23,7 +23,8 @@ try {
     # Note) [System.type].GetType() requires AssemblyQualifiedName, but it's messy:(
     $app.GetType().Assembly.GetExportedTypes() | `
         ? {$_.isEnum} | `
-        %{ Set-Variable `
+        %{ $xlEnum | Add-Member `
+            -MemberType NoteProperty `
             -Name $_.Name `
             -Value ("Microsoft.Office.Interop.Excel.{0}" -f ($_.Name) -as [type]) `
         }
