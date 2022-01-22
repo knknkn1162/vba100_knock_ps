@@ -11,8 +11,8 @@ function Run-Macro($app, $book) {
         $r=$_
         [regex]::Matches($r.Value(), "注意") | `
             # vba is 1-indexed
-            %{$r.Characters($_.index+1,2)} | `
+            %{$r.Characters($_.index+1,2).Font} | `
             # vba color is formatted BBGGRR
-            %{$_.Font.Color=$xlEnum.XlRgbColor::rgbRed; $_.Font.Bold = $true}
+            %{$_.Color=$xlEnum.XlRgbColor::rgbRed; $_.Bold = $true}
     }
 }
