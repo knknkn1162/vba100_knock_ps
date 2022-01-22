@@ -1,5 +1,18 @@
 function Run-Macro($app, $book) {
-    $book.Cells. `
-    SpecialCells($XlCellType::xlCellTypeConstants, $XlCellType::xlTextValues).Cells | `
-    %{$_.Value() -match "注意" }
+    $ws = $book.Worksheets(1)
+    try {
+        $rng = $ws.Cells.SpecialCells($xlEnum.XlCellType::xlCellTypeConstants, $xlEnum.XlSpecialCellsValue::xlTextValues)
+    } catch {
+        Write-Info "cells not found"
+        return
+    }
+
+    $rng | % {
+        $r=$_
+        [regex]::Matches($r.Value(), "注意") | `
+            # vba is 1-indexed
+            %{$r.Characters($_.index+1,2)} | `
+            # vba color is formatted BBGGRR
+            %{$_.Font.Color=$xlEnum.XlRgbColor::rgbRed; $_.Font.Bold = $true}
+    }
 }
