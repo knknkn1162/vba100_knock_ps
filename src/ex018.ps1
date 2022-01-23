@@ -9,5 +9,5 @@ function Run-Macro($app, $book) {
     # msgbox function is is included in [Microsoft.VisualBasic.Interaction]
     #Add-Type -AssemblyName "Microsoft.VisualBasic"
     #[Microsoft.VisualBasic.Interaction]::Msgbox(("visible:{0}, delete:{1}" -f $vs.Count, $refs.Count))
-    $app.Msgbox(("visible:{0}, delete:{1}" -f $vs.Count, $refs.Count))
+    Write-Info ("visible:{0}, delete:{1}" -f $vs.Count, $refs.Count)
 }
