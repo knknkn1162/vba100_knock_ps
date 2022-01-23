@@ -7,7 +7,6 @@ function Run-Macro($app, $book) {
         %{ $_ -replace "元年", "1年" } | `
         %{ (Get-Date -Day 1 $_).AddMonths(1).AddDays(-1) } | `
         Get-Date -f "MMdd"
-    echo $arr
     # See http://officetanaka.net/excel/vba/tips/tips124.htm
     $rng.Offset(0,1) = $app.WorksheetFunction.transpose($arr)
 }
