@@ -1,7 +1,7 @@
 function Run-Macro($app, $book) {
     $ws = $book.Worksheets(1)
     try {
-        $rng = $ws.Cells.SpecialCells($XlCellType::xlCellTypeConstants)
+        $rng = $ws.Cells.SpecialCells($xlEnum.XlCellType::xlCellTypeConstants)
     } catch {
         Write-Info "merged cells not found. exit."
         return
