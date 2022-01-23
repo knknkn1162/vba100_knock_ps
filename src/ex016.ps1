@@ -6,9 +6,10 @@ function Run-Macro($app, $book) {
         return
     }
     $rng.Cells | %{
+        [String[]]$arr = $_.Value() -replace "`r`n", "`n" |`
+            %{$_ -split "`n"} |`
+            ?{$_ -ne ""}
         # "in place" replacement
-        $_.Value() = $_.Value() -replace "`r`n", "`n"
-        [String[]]$arr = $_.Value() -split "`n" | ?{$_ -ne ""}
         $_.Value() = $arr -join "`n"
         Write-Info ("{0}:{1}" -f $_.Address(), $_.Value())
     }
