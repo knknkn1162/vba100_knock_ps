@@ -15,6 +15,8 @@ Function Write-Info([String]$msg) {
 ."$pspath"
 
 $xlEnum = New-Object -TypeName PSObject
+$msoEnum = New-Object -TypeName PSObject
+$xlnull = [System.Reflection.Missing]::Value
 try {
 
     # [Microsoft.Office.Interop.Excel.ApplicationClass]
@@ -28,7 +30,15 @@ try {
             -Name $_.Name `
             -Value ("Microsoft.Office.Interop.Excel.{0}" -f ($_.Name) -as [type]) `
         }
-    $xlnull = [System.Reflection.Missing]::Value
+    # get enumerations such as $msoEnum.msoShapeType::msoTextBox
+    [Microsoft.Office.Core.MsoShapeType].Assembly.GetExportedTypes() |`
+        ? {$_.isEnum} | `
+        %{ $msoEnum | Add-Member `
+            -MemberType NoteProperty `
+            -Name $_.Name `
+            -Value ("Microsoft.Office.Core.{0}" -f ($_.Name) -as [type]) `
+        }
+
     $saveChanges=$true
     if ($debug -eq $true) {
         $app.visible = $true
