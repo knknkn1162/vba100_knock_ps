@@ -4,13 +4,14 @@ function narrow($str) {
 function conv($str) {
     Add-Type -AssemblyName Microsoft.VisualBasic
     $arr = $str.ToCharArray() |` %{
-        $ch = narrow($str)
-        If ($ch -match "[A-Z a-z 0-9]") {$ch} else {$_}
+        $ch = narrow($_)
+        If ($ch -match "[0-9,A-Z,a-z]") {$ch} else {$_}
     }
-    return $arr.join("")
+    return -join $arr
 }
 function Run-Macro($app, $book) {
     $str = "あいうＡＢＣアイウａｂｃ１２３"
-    $str = conv($str)
-    Write-Info ("str -> " + $str)
+    $str2 = conv($str)
+    Write-Info ("before:{0}" -f $str)
+    Write-Info ("after :{0}" -f $str2)
 }
