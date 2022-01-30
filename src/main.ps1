@@ -12,6 +12,10 @@ Function Write-Info([String]$msg) {
     }
 }
 
+function Run-BeforeOpenHook($app) {}
+function Run-AfterCloseHook($app) {}
+
+# You can override hook function. See also https://stackoverflow.com/a/38753003
 ."$pspath"
 
 $xlEnum = New-Object -TypeName PSObject
@@ -45,12 +49,14 @@ try {
         $app.DisplayAlerts = $false
         $saveChanges=$false
     }
+    Run-BeforeOpenHook($app)
     try {
         $book = $app.Workbooks.Open($xlpath)
         Run-Macro $app $book
         $input = Read-Host "press any key.."
     } finally {
         [void]$book.Close($saveChanges)
+        Run-AfterCloseHook($app)
         [System.Runtime.Interopservices.Marshal]::ReleaseComObject($book)
     }
 } finally {
