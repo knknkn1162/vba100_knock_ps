@@ -1,5 +1,5 @@
 
-# TODO: "Unable to cast object of type 'System.Object[]' to type 'System.Object[,]'" in usual way, so we use transpose VBA function twice to cast.(But this is too sticky:(
+# TODO: Is There any way to cast jagged array to multi-dimensional array?
 function cast2d($app, $arr2) {
     return ,($app.WorkSheetFunction.transpose($app.WorkSheetFunction.transpose($arr2)))
 }
