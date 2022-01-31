@@ -20,5 +20,5 @@ function Run-Macro($app, $book) {
     $arr = $rng.Columns(1).Cells |`
         ?{!(Is-Workday $_.Value2() $app $horidays)} |`
         %{,$_.Resize(1, $cols).Value()}
-    $book.Worksheets("土日祝").Range("A2").Resize($arr.Length, $cols) = $arr
+    $book.Worksheets("土日祝").Range("A2").Resize($arr.Length, $cols) = cast2d $app $arr
 }
