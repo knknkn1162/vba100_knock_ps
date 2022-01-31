@@ -3,7 +3,8 @@ function cast2d($app, $arr2) {
 }
 
 function Is-Workday($dt, $app, $horidays) {
-    $app.WorksheetFunction.Workday($dt + 1, -1, $horidays) -eq $dt
+    #$app.WorksheetFunction.Workday($dt + 1, -1, $horidays) -eq $dt
+    $app.WorksheetFunction.Networkdays($dt, $dt, $horidays) -eq 1
 }
 
 function Run-Macro($app, $book) {
