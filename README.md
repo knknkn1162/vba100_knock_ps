@@ -4,6 +4,12 @@
 
 + Powershell version of [knknkn1162/vba100_knock](https://github.com/knknkn1162/vba100_knock). See also https://excel-ubara.com/vba100/.
 
+## note
+
++ we skip several exercises because of the following difficuties:
+    + ex054: unable to implement event proc
+    + ex055: unable to implement event proc
+
 # requirements
 
 + Windows >= 10
