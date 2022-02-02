@@ -43,4 +43,6 @@ make template XLSM=ex001
 # 3. run the script as macro
 make run XLSM=ex001
 # make run XLSM=ex001 DEBUG=0 # save after macro, run faster
+# 4. If you want to cleanup and initialize dirty outputs and inputs, `make clean`
+make clean XLSM=ex057
 ```

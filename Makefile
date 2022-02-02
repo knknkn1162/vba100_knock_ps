@@ -5,6 +5,7 @@ THIS_ENCODING=UTF8
 # shift_jis(check with [Text.Encoding]::Default.WebName)
 EXCEL_ENCODING=default
 BOOKS_DIR=books
+INPUTS_DIR=$(BOOKS_DIR)/inputs
 SRC_DIR=src
 SRC_ENC_DIR=src_enc
 MAIN_PS1=$(SRC_DIR)/main.ps1
@@ -48,7 +49,11 @@ commit:
 	git commit -m "$(COMMIT_MSG) ps in $(XLSM_NAME)"
 
 clean:
-	rm -r -fo $(SRC_ENC_DIR)
+	if(Test-Path $(SRC_ENC_DIR)) { rm -r -fo $(SRC_ENC_DIR) }
+	ls $(BOOKS_DIR) | ?{$$_.PSIsContainer -eq $$true -and $$_.Name -match "$(XLSM_BASENAME)"} | %{rm -r $$_.FullName}
+	cp -r $(INPUTS_DIR)/$(XLSM_BASENAME)* $(BOOKS_DIR)
+
+
 
 create-$(SRC_ENC_DIR):
 	if (!(Test-Path $(SRC_ENC_DIR) )) { mkdir $(SRC_ENC_DIR) }
