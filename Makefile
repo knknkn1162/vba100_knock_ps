@@ -6,6 +6,10 @@ THIS_ENCODING=UTF8
 EXCEL_ENCODING=default
 BOOKS_DIR=books
 INPUTS_DIR=$(BOOKS_DIR)/inputs
+
+ifeq ($(wildcard $(BOOKS_DIR)/.*),)
+$(warning [WARNING] excel files does not exist!)
+endif
 SRC_DIR=src
 SRC_ENC_DIR=src_enc
 MAIN_PS1=$(SRC_DIR)/main.ps1
@@ -34,7 +38,7 @@ ENC_SCRIPT_PATH=$(abspath $(SRC_ENC_DIR)/$(SCRIPT_NAME))
 COMMIT_MSG="implement"
 
 .PHONY: run template
-run: create-$(SRC_ENC_DIR)
+run: clean create-$(SRC_ENC_DIR)
 	gc -en $(THIS_ENCODING) $(SCRIPT_PATH) | Out-File -en $(EXCEL_ENCODING) $(ENC_SCRIPT_PATH)
 	$(MAIN_PS1) -pspath $(ENC_SCRIPT_PATH) -xlpath $(XLSM_ABSPATH) $(DEBUG_OPTION)
 
