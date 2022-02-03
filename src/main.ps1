@@ -5,11 +5,8 @@ Param(
 )
 
 Function Write-Info([String]$msg) {
-    If($debug) {
-        Write-Verbose $msg -verbose
-    } else {
-        Write-Verbose $msg
-    }
+    $parm = @{v = $debug}
+    Write-Verbose @parm $msg
 }
 
 function Run-BeforeOpenHook($app) {}
