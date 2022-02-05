@@ -5,10 +5,10 @@ function Run-Macro($app, $book) {
     }
     $book.Worksheets |`
         %{$_.PageSetUp.Orientation = $xlEnum.XlPageOrientation::xlLandscape}
+    Add-Type -AssemblyName Microsoft.VisualBasic
     $app.Windows |`
         %{$_.SheetViews} |`
-        # use get-member instead of TypeName
-        ?{($_ | gm | %{$_.Name}) -contains "DisplayGridlines"} | %{
+        ?{[string]([Microsoft.VisualBasic.Information]::TypeName($_)) -eq "WorksheetView"} | %{
             # goto(reference, scroll)
             $app.GoTo($_.Sheet.Range("A1"), $true)
             $_.DisplayGridlines = $false

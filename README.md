@@ -9,6 +9,8 @@
 + we skip several exercises because of the following difficuties:
     + ex054: unable to implement event proc
     + ex055: unable to implement event proc
+    + ex068: form control
+    + ex070: timer event
 
 # requirements
 
