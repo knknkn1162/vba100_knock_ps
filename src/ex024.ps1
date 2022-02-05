@@ -1,10 +1,10 @@
-function narrow($str) {
+function Tonarrow($str) {
     return [Microsoft.VisualBasic.Strings]::StrConv($str, [Microsoft.VisualBasic.VbStrConv]::Narrow)
 }
 function conv($str) {
     Add-Type -AssemblyName Microsoft.VisualBasic
     $arr = $str.ToCharArray() |` %{
-        $ch = narrow($_)
+        $ch = Tonarrow($_)
         If ($ch -match "[0-9,A-Z,a-z]") {$ch} else {$_}
     }
     return -join $arr
