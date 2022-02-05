@@ -12,14 +12,9 @@ function Run-Macro($app, $book) {
     $rng = $app.Intersect($rng.Offset(1), $rng)
     $cols = $rng.Columns.Count
     $horidays = $book.Worksheets("祝日").Range("A1").CurrentRegion.Columns(1)
-    $arr = $rng.Columns(1).Cells |`
-        # Value2: get serial value
-        ?{Is-Workday $_.Value2() $app $horidays} |`
-        %{,$_.Resize(1, $cols).Value()}
-    $book.Worksheets("平日").Range("A2").Resize($arr.Length, $cols) = cast2d $app $arr
-
-    $arr = $rng.Columns(1).Cells |`
-        ?{!(Is-Workday $_.Value2() $app $horidays)} |`
-        %{,$_.Resize(1, $cols).Value()}
-    $book.Worksheets("土日祝").Range("A2").Resize($arr.Length, $cols) = cast2d $app $arr
+    $rng.Columns(1).Cells |`
+        group {if(Is-Workday $_.Value2() $app $horidays) {"平日"} else {"土日祝"}} | %{
+            $arr = $_.group | %{,$_.Resize(1,$cols)}
+            $book.Worksheets($_.Name).Range("A2").Resize($arr.Length, $cols) = cast2d $app $arr
+    }
 }
