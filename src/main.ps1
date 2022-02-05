@@ -18,6 +18,10 @@ function Run-AfterCloseHook($app) {}
 $xlEnum = New-Object -TypeName PSObject
 $msoEnum = New-Object -TypeName PSObject
 $xlnull = [System.Reflection.Missing]::Value
+
+# to use [Microsoft.VisualBasic.(Information|Constants)]
+Add-Type -AssemblyName Microsoft.VisualBasic
+
 try {
 
     # [Microsoft.Office.Interop.Excel.ApplicationClass]
