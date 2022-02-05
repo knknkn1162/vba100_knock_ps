@@ -4,8 +4,7 @@ function Run-Macro($app, $book) {
         ? {$_.MergeArea(1).Address() -eq $_.Address()} | `
         % {
             $rng2 = $_.MergeArea(); $rng2.Unmerge()
-            $val = $_.Value(); $cnt = $rng2.Count
-
+            $val, $cnt = $_.Value(), $rng2.Count
             $rng2.Value() = [Math]::Truncate($val/$cnt)
             $rng2.Resize($val % $cnt) | %{$_.Value() += 1}
         }
