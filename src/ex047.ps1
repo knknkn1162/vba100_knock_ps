@@ -5,7 +5,6 @@ function Run-Macro($app, $book) {
     }
     $book.Worksheets |`
         %{$_.PageSetUp.Orientation = $xlEnum.XlPageOrientation::xlLandscape}
-    Add-Type -AssemblyName Microsoft.VisualBasic
     $app.Windows |`
         %{$_.SheetViews} |`
         ?{[string]([Microsoft.VisualBasic.Information]::TypeName($_)) -eq "WorksheetView"} | %{
