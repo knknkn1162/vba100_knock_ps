@@ -1,7 +1,7 @@
 function getFormulaCells($ws) {
     $ret = @()
     try {
-        $ret = $ws.Cells.SpecialCells($xlEnum.XlCellType::xlCellTypeFormulas).Cells | %{$_}
+        $ret = @($ws.Cells.SpecialCells($xlEnum.XlCellType::xlCellTypeFormulas).Cells)
     } catch {}
     return $ret
 }
