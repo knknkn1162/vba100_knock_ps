@@ -11,6 +11,9 @@
     + ex055: unable to implement event proc
     + ex068: form control
     + ex070: timer event
+    + ex073: form control
+    + ex076: form control
+    + ex077: worksheet event
 
 # requirements
 
