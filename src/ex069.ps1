@@ -2,10 +2,9 @@ function Find-MergeCells($app, $rng) {
     [string[]]$arr = @()
     $app.FindFormat.MergeCells = $true
     do {
-        try {
-            # Find (What, After, LookIn, LookAt, SearchOrder, SearchDirection, MatchCase, MatchByte, SearchFormat)
-            $nrng = $rng.Worksheet.Cells.Find("", $rng, $xlnull, $xlnull, $xlnull, $xlnull, $xlnull, $xlnull, $true)
-        } catch { break }
+        # Find (What, After, LookIn, LookAt, SearchOrder, SearchDirection, MatchCase, MatchByte, SearchFormat)
+        # return 'Nothing' if not exists
+        $nrng = $rng.Worksheet.Cells.Find("", $rng, $xlnull, $xlnull, $xlnull, $xlnull, $xlnull, $xlnull, $true)
         if($nrng -eq $null) { break }
         if($nrng.Address() -in $arr) { break }
         $arr += $nrng.Address()
