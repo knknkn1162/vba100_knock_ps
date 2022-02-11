@@ -7,13 +7,14 @@
 ## note
 
 + we skip several exercises because of the following difficuties:
-    + ex054: unable to implement event proc
-    + ex055: unable to implement event proc
+    + ex054: worksheet event
+    + ex055: worksheet event
     + ex068: form control
     + ex070: timer event
     + ex073: form control
     + ex076: form control
     + ex077: worksheet event
+    + ex080: worksheet event
 
 # requirements
 
