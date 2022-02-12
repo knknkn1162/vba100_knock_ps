@@ -2,11 +2,6 @@ function Is-Excel($fpath) {
      return ([System.IO.Path]::GetExtension($fpath) -match "xls")
 }
   
-function Conf-Connection($conn, [string]$accpath, [bool]$type) {
-    $conn.Provider = "Microsoft.ACE.OLEDB.12.0"
-    $conn.ConnectionString = $accpath
-}
-
 function Create-Query($srcpath, [string]$date, [int]$price, [bool]$isExcel) {
     $arr = cat -en UTF8 $srcpath |`
         %{$_ -replace '\$date', $date} |`

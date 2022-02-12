@@ -42,8 +42,9 @@ run: clean create-$(SRC_ENC_DIR)
 	gc -en $(THIS_ENCODING) $(SCRIPT_PATH) | Out-File -en $(EXCEL_ENCODING) $(ENC_SCRIPT_PATH)
 	$(MAIN_PS1) -pspath $(ENC_SCRIPT_PATH) -xlpath $(XLSM_ABSPATH) $(DEBUG_OPTION)
 
-# in ex096, ex097
-adodb-run: clean create-$(SRC_ENC_DIR)
+# in ex096, ex097, make command has the problem about ComObject(ADODB.Connection) connection open.(プロバイダーが見つかりません。正しくインストールされていない可能性があります。)
+# We checked success without make, so we separate commands from `make run`.
+run-with-adodb: clean create-$(SRC_ENC_DIR)
 	gc -en $(THIS_ENCODING) $(SCRIPT_PATH) | Out-File -en $(EXCEL_ENCODING) $(ENC_SCRIPT_PATH)
 	@echo "=> type command; $(MAIN_PS1) -pspath $(ENC_SCRIPT_PATH) -xlpath $(XLSM_ABSPATH) $(DEBUG_OPTION)"
 
