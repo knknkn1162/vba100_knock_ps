@@ -1,4 +1,4 @@
-SHELL:=powershell.exe
+SHELL:= powershell.exe
 .SHELLFLAGS:= -NoProfile -ExecutionPolicy RemoteSigned -Command
 
 THIS_ENCODING=UTF8
@@ -41,6 +41,11 @@ COMMIT_MSG="implement"
 run: clean create-$(SRC_ENC_DIR)
 	gc -en $(THIS_ENCODING) $(SCRIPT_PATH) | Out-File -en $(EXCEL_ENCODING) $(ENC_SCRIPT_PATH)
 	$(MAIN_PS1) -pspath $(ENC_SCRIPT_PATH) -xlpath $(XLSM_ABSPATH) $(DEBUG_OPTION)
+
+# in ex096, ex097
+adodb-run: clean create-$(SRC_ENC_DIR)
+	gc -en $(THIS_ENCODING) $(SCRIPT_PATH) | Out-File -en $(EXCEL_ENCODING) $(ENC_SCRIPT_PATH)
+	@echo "=> type command; $(MAIN_PS1) -pspath $(ENC_SCRIPT_PATH) -xlpath $(XLSM_ABSPATH) $(DEBUG_OPTION)"
 
 template:
 	cp ./template/template.ps1 $(SCRIPT_PATH)
