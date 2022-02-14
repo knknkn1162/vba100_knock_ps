@@ -5,7 +5,7 @@ function cast2d($app, $arr2) {
 function Run-Macro($app, $book) {
     $basename = [System.IO.Path]::GetFileNameWithoutExtension($book.Name)
     $bdir = "{0}/{1}" -f $book.Path, $basename
-    $mat = ls $bdir |`
+    $mat = ls -File $bdir |`
         %{,@($_.Name, $_.LastAccessTime, $_.Length)}
     $ws = $book.Worksheets("ファイル一覧")
     $ws.Range("A1").Resize(1,3) = @("ファイル一覧", "更新日時", "サイズ")
