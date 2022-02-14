@@ -41,6 +41,7 @@ function shuffle($row, $col, $app) {
         %{$r=$_; 0..($col-1) |`
             %{ $arr2[$r, $_] = $r * $col + $_ } 
         }
+    $arr2 = 0..($row-1) | %{$r=$_; ,@(0..($col-1) | %{$r * $col + $_}) }
     $arr2 = $app.WorksheetFunction.transpose($arr2)
     rotate([ref]$arr2)
     $arr2 = $app.WorksheetFunction.transpose($arr2)
