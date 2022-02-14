@@ -16,10 +16,8 @@ function Run-Macro($app, $book) {
     [string[]]$header = $content | Select-HtmlContent "table > thead > tr > th"
     $ws.Range("A1").Resize(1, $header.length) = $header
     $body = 1..5 | %{
-        [string[]]$ret = $content | Select-HtmlContent "table > tbody > tr > td:nth-child($_)"
-        ,@($ret)
+        ,@([string[]]($content | Select-HtmlContent "table > tbody > tr > td:nth-child($_)"))
     }
-    $row = @($body[0]).length
-    $ws.Range("A2").Resize(@($body[0]).length, 5) = $app.WorkSheetFunction.transpose($body)
+    $ws.Range("A2").Resize($body[0].length, 5) = $app.WorkSheetFunction.transpose($body)
     [void]$ws.UsedRange.EntireColumn.AutoFit()
 }
