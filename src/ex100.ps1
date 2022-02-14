@@ -6,6 +6,7 @@ function convertUTF8($str) {
 function cast2d($app, $arr2) {
     return ,($app.WorkSheetFunction.transpose($app.WorkSheetFunction.transpose($arr2)))
 }
+# see https://github.com/kamome283/AngleParse
 Import-Module AngleParse
 
 function Run-Macro($app, $book) {

@@ -25,6 +25,7 @@
 
 + Install chocolatey, make
 + (Optional) ghostscript, imagemagick.app
++ (for ex100) AngleParse
 
 ```ps
 # scripts to be runnable
@@ -38,6 +39,9 @@ Start-Process powershell -Verb runAs
 choco install -y imagemagick.app ghostscript
 ## specify version
 $ENV:Path="C:\Program Files\ImageMagick-${version};"+$ENV:Path
+
+# (For ex100) See https://github.com/kamome283/AngleParse
+Install-Module AngleParse
 ```
 
 # How to run scripts
